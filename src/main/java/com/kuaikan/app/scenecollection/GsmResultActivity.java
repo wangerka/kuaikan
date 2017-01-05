@@ -9,7 +9,6 @@ import android.os.Message;
 import android.telephony.CellInfo;
 import android.telephony.PhoneStateListener;
 import android.util.Log;
-import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,20 +21,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-//import com.android.internal.telephony.Phone;
-//import com.android.internal.telephony.PhoneFactory;
-//import android.os.AsyncResult;
-//import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
+import static com.kuaikan.app.scenecollection.Util.OP_CMCC;
+import static com.kuaikan.app.scenecollection.Util.OP_CU;
+import static com.kuaikan.app.scenecollection.Util.OP_TELCOM;
 
 public class GsmResultActivity extends Activity implements OnClickListener{
 
@@ -66,13 +59,13 @@ public class GsmResultActivity extends Activity implements OnClickListener{
         if(savedInstanceState == null) {
             if (networkModeType == Util.TYPE_CMCC_GSM || networkModeType == Util.TYPE_CMCC_TDSCDMA || networkModeType == Util.TYPE_CMCC_LTE) {
 //                OpSetting.getIntentce().switchSimCard(this, OpSetting.OP_CMCC);
-                Util.startSetOPService(this, OpSetting.OP_CMCC);
+                Util.startSetOPService(this, OP_CMCC);
             } else if (networkModeType == Util.TYPE_CU_GSM || networkModeType == Util.TYPE_CU_LTE || networkModeType == Util.TYPE_CU_WCDMA) {
 //                OpSetting.getIntentce().switchSimCard(this, OpSetting.OP_CU);
-                Util.startSetOPService(this, OpSetting.OP_CU);
+                Util.startSetOPService(this, OP_CU);
             } else if (networkModeType == Util.TYPE_TELECOM_LTE) {
 //                OpSetting.getIntentce().switchSimCard(this, OpSetting.OP_TELCOM);
-                Util.startSetOPService(this, OpSetting.OP_TELCOM);
+                Util.startSetOPService(this, OP_TELCOM);
             }
         }
 
@@ -81,7 +74,6 @@ public class GsmResultActivity extends Activity implements OnClickListener{
         list = (ListView) findViewById(R.id.list);
         bar = (RelativeLayout) findViewById(R.id.progress);
 
-        Util.invokeAT(new String[]{"AT+EGMR=0,5", "+EGMR"}, mHandler.obtainMessage(100));
     }
 
     @Override
@@ -196,10 +188,6 @@ public class GsmResultActivity extends Activity implements OnClickListener{
 //                    showResult(msg, "EVENT_COPS");
 //                    break;
 //                }
-                case 100:{
-                    showResult(msg, "###############");
-                    break;
-                }
             }
         }
     };

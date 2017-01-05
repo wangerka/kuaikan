@@ -1,17 +1,8 @@
 package com.kuaikan.app.scenecollection;
 
-//import com.android.internal.telephony.Phone;
-//import com.android.internal.telephony.PhoneFactory;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.os.Message;
-//import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -22,15 +13,15 @@ import android.widget.Toast;
 
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import static android.R.attr.tag;
-import static com.kuaikan.app.scenecollection.Result.RAT_CDMA;
 
 public class Util{
 
@@ -53,6 +44,10 @@ public class Util{
     public static final String[] CU_MNC = {"1"};
     public static final String[] CMCC_MNC = {"0"};
     public static final String[] TELECOM_MNC = {"11", "3"};
+
+    public static final String OP_CMCC = "cmcc";
+    public static final String OP_CU = "cu";
+    public static final String OP_TELCOM = "telcom";
 
     public static void setGeneration(int generation, Message msg) throws Exception{
         String[] atCmd = new String[]{"AT+ERAT="+generation,"+ERAT"};

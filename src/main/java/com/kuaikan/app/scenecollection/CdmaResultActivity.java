@@ -1,49 +1,28 @@
 package com.kuaikan.app.scenecollection;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.app.Activity;
-import android.util.Log;
-
-//import com.android.internal.telephony.Phone;
-//import com.android.internal.telephony.PhoneFactory;
-import android.telephony.SubscriptionManager;
-import android.telephony.CellInfo;
-import android.telephony.TelephonyManager;
-import android.telephony.PhoneStateListener;
-import java.util.List;
-import android.os.Handler;
-import android.os.Message;
-//import android.os.AsyncResult;
-//import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
-
-import android.widget.ListView;
-import android.content.Context;
-import android.widget.BaseAdapter;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import java.util.ArrayList;
-
-import java.io.IOException;
-import java.io.FileOutputStream;
-import org.xmlpull.v1.XmlSerializer;
-import android.util.Xml;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
+
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.kuaikan.app.scenecollection.Util.OP_TELCOM;
 
 public class CdmaResultActivity extends Activity{
-
-//    private Phone phone;
 
     private int networkModeType;
     List<Result> resultList;
@@ -65,7 +44,8 @@ public class CdmaResultActivity extends Activity{
         Log.i("gejun","*************CDMA onCreate() savedInstanceState = " + savedInstanceState);
         setContentView(R.layout.cdma_list);
         if(savedInstanceState == null){
-            OpSetting.getIntentce().switchSimCard(this, OpSetting.OP_TELCOM);
+//            OpSetting.getIntentce().switchSimCard(this, OpSetting.OP_TELCOM);
+            Util.startSetOPService(this, OP_TELCOM);
         } else {
             mcc = savedInstanceState.getString("mcc");
             mnc = savedInstanceState.getString("mnc");

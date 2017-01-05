@@ -1,25 +1,14 @@
 package com.kuaikan.app.scenecollection;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
-import android.app.Activity;
-import android.util.Log;
 
 //import com.android.internal.telephony.Phone;
 //import com.android.internal.telephony.PhoneFactory;
-import android.telephony.SubscriptionManager;
-import android.telephony.CellInfo;
-import android.telephony.TelephonyManager;
-import android.telephony.PhoneStateListener;
-import java.util.List;
-import android.os.Handler;
-import android.os.Message;
 //import android.os.AsyncResult;
 //import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
 

@@ -1,31 +1,8 @@
 package com.kuaikan.app.scenecollection;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
 import android.app.Activity;
-import android.util.Log;
-
-//import com.android.internal.telephony.Phone;
-//import com.android.internal.telephony.PhoneFactory;
-import android.telephony.SubscriptionManager;
-import android.telephony.CellInfo;
-import android.telephony.TelephonyManager;
-import android.telephony.PhoneStateListener;
-import java.util.List;
-import android.os.Handler;
-import android.os.Message;
-//import android.os.AsyncResult;
-//import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
-
-import java.util.Iterator;
-
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -33,11 +10,20 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Iterator;
+
+//import com.android.internal.telephony.Phone;
+//import com.android.internal.telephony.PhoneFactory;
+//import android.os.AsyncResult;
+//import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
 //import org.apache.http.HttpEntity;
 //import org.apache.http.HttpResponse;
 //import org.apache.http.NameValuePair;
@@ -47,9 +33,6 @@ import android.widget.Toast;
 //import org.apache.http.client.methods.HttpPost;
 //import org.apache.http.impl.client.DefaultHttpClient;
 //import org.apache.http.message.BasicNameValuePair;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.text.MessageFormat;
 
 public class GPSActivity extends Activity{
 

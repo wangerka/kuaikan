@@ -8,16 +8,11 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.CellInfo;
-import android.telephony.PhoneStateListener;
 import android.util.Log;
-import android.util.Xml;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -25,19 +20,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import static android.content.Intent.ACTION_SEARCH;
-import static com.kuaikan.app.scenecollection.R.id.cdma;
-import static com.kuaikan.app.scenecollection.R.id.cmcc;
 import static com.kuaikan.app.scenecollection.R.id.startTime;
 
 //import com.android.internal.telephony.Phone;
