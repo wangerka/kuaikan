@@ -310,7 +310,7 @@ public class OneKeyActivity extends Activity{
             Log.i("gejun","resutl size111 = " + resultList.size());
             totalList.addAll(resultList);
             mDataAdapter1.setData(resultList);
-            setListViewHeightBasedOnChildren(list1);
+            Util.setListViewHeightBasedOnChildren(list1);
             mDataAdapter1.notifyDataSetChanged();
             flag++;
             mHandler.removeMessages(EVENT_GET_CELLINFO);
@@ -320,7 +320,7 @@ public class OneKeyActivity extends Activity{
             Log.i("gejun","resutl size222 = " + resultList.size());
             totalList.addAll(resultList);
             mDataAdapter2.setData(resultList);
-            setListViewHeightBasedOnChildren(list2);
+            Util.setListViewHeightBasedOnChildren(list2);
             mDataAdapter2.notifyDataSetChanged();
             flag++;
             mHandler.removeMessages(EVENT_GET_CELLINFO);
@@ -330,7 +330,7 @@ public class OneKeyActivity extends Activity{
             Log.i("gejun","resutl size333 = " + resultList.size());
             totalList.addAll(resultList);
             mDataAdapter3.setData(resultList);
-            setListViewHeightBasedOnChildren(list3);
+            Util.setListViewHeightBasedOnChildren(list3);
             mDataAdapter3.notifyDataSetChanged();
             flag++;
         } else if(flag == 3){
@@ -438,30 +438,6 @@ public class OneKeyActivity extends Activity{
     private String toEight(String shiliu){
         shiliu = shiliu.substring(1, shiliu.length()-1);
         return Integer.parseInt(shiliu, 16)+"";
-    }
-
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        if(listView == null) return;
-
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            GsmResult item = (GsmResult) listAdapter.getItem(i);
-            Log.i("gejun","item.LAC = " + item.getLac());
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        Log.i("gejun","ListHeight = " + params.height);
-        listView.setLayoutParams(params);
     }
 
     @Override

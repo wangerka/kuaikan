@@ -208,38 +208,38 @@ public class ShowActivity extends Activity {
 
             if (tag.equals(CU_GSM)) {
                 mDataAdapter1.setData(resultList);
-                setListViewHeightBasedOnChildren(list1);
+                Util.setListViewHeightBasedOnChildren(list1);
                 mDataAdapter1.notifyDataSetChanged();
             }
             if (tag.equals(CU_3G)) {
                 mDataAdapter2.setData(resultList);
-                setListViewHeightBasedOnChildren(list2);
+                Util.setListViewHeightBasedOnChildren(list2);
                 mDataAdapter2.notifyDataSetChanged();
             }
             if (tag.equals(CU_4G)) {
                 mDataAdapter3.setData(resultList);
-                setListViewHeightBasedOnChildren(list3);
+                Util.setListViewHeightBasedOnChildren(list3);
                 mDataAdapter3.notifyDataSetChanged();
             }
             if (tag.equals(CMCC_GSM)) {
                 mDataAdapter4.setData(resultList);
-                setListViewHeightBasedOnChildren(list4);
+                Util.setListViewHeightBasedOnChildren(list4);
                 mDataAdapter4.notifyDataSetChanged();
             }
             if (tag.equals(CMCC_3G)) {
                 mDataAdapter5.setData(resultList);
-                setListViewHeightBasedOnChildren(list5);
+                Util.setListViewHeightBasedOnChildren(list5);
                 mDataAdapter5.notifyDataSetChanged();
             }
             if (tag.equals(CMCC_4G)) {
                 mDataAdapter6.setData(resultList);
-                setListViewHeightBasedOnChildren(list6);
+                Util.setListViewHeightBasedOnChildren(list6);
                 mDataAdapter6.notifyDataSetChanged();
             }
 
             if (tag.equals(TELECOM_4G)) {
                 mDataAdapter7.setData(resultList);
-                setListViewHeightBasedOnChildren(list7);
+                Util.setListViewHeightBasedOnChildren(list7);
                 mDataAdapter7.notifyDataSetChanged();
             }
         }
@@ -283,32 +283,8 @@ public class ShowActivity extends Activity {
             }
             Log.e("gejun", "[ShowActivity][showList] result8:" +result8.size());
             mDataAdapter8.setData(result8);
-            setListViewHeightBasedOnChildren(list8);
+            Util.setListViewHeightBasedOnChildren(list8);
             mDataAdapter8.notifyDataSetChanged();
         }
     }
-
-    private void setListViewHeightBasedOnChildren(ListView listView) {
-        if (listView == null) return;
-
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            Log.e("gejun", "[ShowActivity][setListViewHeightBasedOnChildren] listAdapter == null");
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        Log.e("gejun", "[ShowActivity][setListViewHeightBasedOnChildren] height: "+params.height);
-        listView.setLayoutParams(params);
-    }
-
 }

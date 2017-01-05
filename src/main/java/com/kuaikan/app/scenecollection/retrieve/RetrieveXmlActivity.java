@@ -155,101 +155,49 @@ public class RetrieveXmlActivity extends Activity {
                         initFirst2Row(currentTag, arraylist1);
                         yd2g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist1.add(gsm);
+                    addItem(arraylist1, item);
                 } else if(currentTag == Util.TYPE_CMCC_TDSCDMA){
                     if(!yd3g){
                         arraylist2 = new ArrayList<GsmResult>();
                         initFirst2Row(currentTag, arraylist2);
                         yd3g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist2.add(gsm);
+                    addItem(arraylist2, item);
                 } else if(currentTag == Util.TYPE_CMCC_LTE){
                     if(!yd4g){
                         arraylist3 = new ArrayList<GsmResult>();
                         initFirst2Row(currentTag, arraylist3);
                         yd4g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist3.add(gsm);
+                    addItem(arraylist3, item);
                 } else if(currentTag == Util.TYPE_CU_GSM){
                     if(!lt2g){
                         arraylist4 = new ArrayList<GsmResult>();
                         initFirst2Row(currentTag, arraylist4);
                         lt2g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist4.add(gsm);
+                    addItem(arraylist4, item);
                 } else if(currentTag == Util.TYPE_CU_WCDMA){
                     if(!lt3g){
                         arraylist5 = new ArrayList<GsmResult>();
                         initFirst2Row(currentTag, arraylist5);
                         lt3g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    Log.i("gejun","lac = "+lac+", cid = "+ cid +", rssi = " + rsi);
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist5.add(gsm);
+                    addItem(arraylist5, item);
                 } else if(currentTag == Util.TYPE_CU_LTE){
                     if(!lt4g){
                         arraylist6 = new ArrayList<GsmResult>();
                         initFirst2Row(currentTag, arraylist6);
                         lt4g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    Log.i("gejun","lac = "+lac+", cid = "+ cid +", rssi = " + rsi);
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist6.add(gsm);
+                    addItem(arraylist6, item);
                 } else if(currentTag == Util.TYPE_TELECOM_LTE){
                     if(!dx4g){
                         arraylist7 = new ArrayList<GsmResult>();
                         initFirst2Row(currentTag, arraylist7);
                         dx4g = true;
                     }
-                    GsmResult gsm = new GsmResult();
-                    String lac = ((GsmResult)item).getLac();
-                    String cid = ((GsmResult)item).getCellId();
-                    String rsi = ((GsmResult)item).getRssi();
-                    Log.i("gejun","lac = "+lac+", cid = "+ cid +", rssi = " + rsi);
-                    gsm.setLac(lac);
-                    gsm.setCellId(cid);
-                    gsm.setRssi(rsi);
-                    arraylist7.add(gsm);
+                    addItem(arraylist7, item);
                 } else if(currentTag == Util.TYPE_CDMA){
                     if(!cdma) {
                         cdma = true;
@@ -284,6 +232,18 @@ public class RetrieveXmlActivity extends Activity {
         }
     }
 
+    private void addItem(List<GsmResult> list, Result item){
+        GsmResult gsm = new GsmResult();
+        String lac = ((GsmResult)item).getLac();
+        String cid = ((GsmResult)item).getCellId();
+        String rsi = ((GsmResult)item).getRssi();
+        Log.i("gejun","lac = "+lac+", cid = "+ cid +", rssi = " + rsi);
+        gsm.setLac(lac);
+        gsm.setCellId(cid);
+        gsm.setRssi(rsi);
+        list.add(gsm);
+    }
+
     public void initFirst2Row(int tag, List<GsmResult> list){
         GsmResult r1 = new GsmResult();
         if(tag == Util.TYPE_CMCC_GSM){
@@ -312,59 +272,36 @@ public class RetrieveXmlActivity extends Activity {
 
     public void notify1(){
         mDataAdapter1.setData(arraylist1);
-        setListViewHeightBasedOnChildren(list1);
+        Util.setListViewHeightBasedOnChildren(list1);
         mDataAdapter1.notifyDataSetChanged();
 
         mDataAdapter2.setData(arraylist2);
-        setListViewHeightBasedOnChildren(list2);
+        Util.setListViewHeightBasedOnChildren(list2);
         mDataAdapter2.notifyDataSetChanged();
 
         mDataAdapter3.setData(arraylist3);
-        setListViewHeightBasedOnChildren(list3);
+        Util.setListViewHeightBasedOnChildren(list3);
         mDataAdapter3.notifyDataSetChanged();
 
         mDataAdapter4.setData(arraylist4);
-        setListViewHeightBasedOnChildren(list4);
+        Util.setListViewHeightBasedOnChildren(list4);
         mDataAdapter4.notifyDataSetChanged();
 
         mDataAdapter5.setData(arraylist5);
-        setListViewHeightBasedOnChildren(list5);
+        Util.setListViewHeightBasedOnChildren(list5);
         mDataAdapter5.notifyDataSetChanged();
 
         mDataAdapter6.setData(arraylist6);
-        setListViewHeightBasedOnChildren(list6);
+        Util.setListViewHeightBasedOnChildren(list6);
         mDataAdapter6.notifyDataSetChanged();
 
         mDataAdapter7.setData(arraylist7);
-        setListViewHeightBasedOnChildren(list7);
+        Util.setListViewHeightBasedOnChildren(list7);
         mDataAdapter7.notifyDataSetChanged();
 
         mDataAdapter8.setData(arraylist8);
-        setListViewHeightBasedOnChildren(list8);
+        Util.setListViewHeightBasedOnChildren(list8);
         mDataAdapter8.notifyDataSetChanged();
-    }
-
-    private void setListViewHeightBasedOnChildren(ListView listView) {
-        if (listView == null) return;
-
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            Log.e("gejun", "[ShowActivity][setListViewHeightBasedOnChildren] listAdapter == null");
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        Log.e("gejun", "[ShowActivity][setListViewHeightBasedOnChildren] height: "+params.height);
-        listView.setLayoutParams(params);
     }
 
     private int getCellTag(String rat, String mnc){
