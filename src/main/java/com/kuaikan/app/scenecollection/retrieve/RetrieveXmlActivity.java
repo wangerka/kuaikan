@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -44,11 +41,6 @@ public class RetrieveXmlActivity extends Activity {
     private InputStream is;
     private List<Result> origin;
 
-    private String oldRat = "";
-    private String oldMcc = "";
-    private String oldMnc = "";
-
-    private RelativeLayout bar;
     private ListView list1;
     private ListView list2;
     private ListView list3;
@@ -135,8 +127,9 @@ public class RetrieveXmlActivity extends Activity {
     protected void onResume() {
         super.onResume();
         if(!lt2g && !lt3g && !lt4g && !yd2g && !yd3g && !yd4g && !dx4g && !cdma) {
-            //String filePath = getIntent().getStringExtra("file");
-            String filePath = "/storage/sdcard0/attach_2a6fd8d6565847db805d02990bd5b814.xml";
+            String filePath = getIntent().getStringExtra("xml");
+            Log.i("gejun","parse xml : " + filePath);
+//            String filePath = "/storage/sdcard0/attach_2a6fd8d6565847db805d02990bd5b814.xml";
             try {
                 is = new BufferedInputStream(new FileInputStream(new File(filePath)));
                 origin = new SaxXmlParser().parse(is);
@@ -144,91 +137,92 @@ public class RetrieveXmlActivity extends Activity {
                 e.printStackTrace();
             }
 
-            for(Result item : origin){
-                String mnc = item.getMnc();
-                String rat = item.getRat();
+            if(origin != null) {
+                for (Result item : origin) {
+                    String mnc = item.getMnc();
+                    String rat = item.getRat();
 
-                int currentTag = getCellTag(rat, mnc);
-                if(currentTag == Util.TYPE_CMCC_GSM){
-                    if(!yd2g){
-                        arraylist1 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist1);
-                        yd2g = true;
-                    }
-                    addItem(arraylist1, item);
-                } else if(currentTag == Util.TYPE_CMCC_TDSCDMA){
-                    if(!yd3g){
-                        arraylist2 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist2);
-                        yd3g = true;
-                    }
-                    addItem(arraylist2, item);
-                } else if(currentTag == Util.TYPE_CMCC_LTE){
-                    if(!yd4g){
-                        arraylist3 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist3);
-                        yd4g = true;
-                    }
-                    addItem(arraylist3, item);
-                } else if(currentTag == Util.TYPE_CU_GSM){
-                    if(!lt2g){
-                        arraylist4 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist4);
-                        lt2g = true;
-                    }
-                    addItem(arraylist4, item);
-                } else if(currentTag == Util.TYPE_CU_WCDMA){
-                    if(!lt3g){
-                        arraylist5 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist5);
-                        lt3g = true;
-                    }
-                    addItem(arraylist5, item);
-                } else if(currentTag == Util.TYPE_CU_LTE){
-                    if(!lt4g){
-                        arraylist6 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist6);
-                        lt4g = true;
-                    }
-                    addItem(arraylist6, item);
-                } else if(currentTag == Util.TYPE_TELECOM_LTE){
-                    if(!dx4g){
-                        arraylist7 = new ArrayList<GsmResult>();
-                        initFirst2Row(currentTag, arraylist7);
-                        dx4g = true;
-                    }
-                    addItem(arraylist7, item);
-                } else if(currentTag == Util.TYPE_CDMA){
-                    if(!cdma) {
-                        cdma = true;
-                        arraylist8 = new ArrayList<CdmaResult>();
-                        CdmaResult r1 = new CdmaResult();
-                        r1.setSid(getString(R.string.cdma));
-                        arraylist8.add(r1);
+                    int currentTag = getCellTag(rat, mnc);
+                    if (currentTag == Util.TYPE_CMCC_GSM) {
+                        if (!yd2g) {
+                            arraylist1 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist1);
+                            yd2g = true;
+                        }
+                        addItem(arraylist1, item);
+                    } else if (currentTag == Util.TYPE_CMCC_TDSCDMA) {
+                        if (!yd3g) {
+                            arraylist2 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist2);
+                            yd3g = true;
+                        }
+                        addItem(arraylist2, item);
+                    } else if (currentTag == Util.TYPE_CMCC_LTE) {
+                        if (!yd4g) {
+                            arraylist3 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist3);
+                            yd4g = true;
+                        }
+                        addItem(arraylist3, item);
+                    } else if (currentTag == Util.TYPE_CU_GSM) {
+                        if (!lt2g) {
+                            arraylist4 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist4);
+                            lt2g = true;
+                        }
+                        addItem(arraylist4, item);
+                    } else if (currentTag == Util.TYPE_CU_WCDMA) {
+                        if (!lt3g) {
+                            arraylist5 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist5);
+                            lt3g = true;
+                        }
+                        addItem(arraylist5, item);
+                    } else if (currentTag == Util.TYPE_CU_LTE) {
+                        if (!lt4g) {
+                            arraylist6 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist6);
+                            lt4g = true;
+                        }
+                        addItem(arraylist6, item);
+                    } else if (currentTag == Util.TYPE_TELECOM_LTE) {
+                        if (!dx4g) {
+                            arraylist7 = new ArrayList<GsmResult>();
+                            initFirst2Row(currentTag, arraylist7);
+                            dx4g = true;
+                        }
+                        addItem(arraylist7, item);
+                    } else if (currentTag == Util.TYPE_CDMA) {
+                        if (!cdma) {
+                            cdma = true;
+                            arraylist8 = new ArrayList<CdmaResult>();
+                            CdmaResult r1 = new CdmaResult();
+                            r1.setSid(getString(R.string.cdma));
+                            arraylist8.add(r1);
 
-                        CdmaResult r2 = new CdmaResult();
-                        r2.setSid(getString(R.string.sid));
-                        r2.setNid(getString(R.string.nid));
-                        r2.setBid(getString(R.string.bid));
-                        r2.setPn(getString(R.string.pn));
-                        r2.setRx(getString(R.string.rx));
-                        arraylist8.add(r2);
-                    }
+                            CdmaResult r2 = new CdmaResult();
+                            r2.setSid(getString(R.string.sid));
+                            r2.setNid(getString(R.string.nid));
+                            r2.setBid(getString(R.string.bid));
+                            r2.setPn(getString(R.string.pn));
+                            r2.setRx(getString(R.string.rx));
+                            arraylist8.add(r2);
+                        }
 
                         CdmaResult c = new CdmaResult();
-                        c.setSid(((CdmaResult)item).getSid());
-                        c.setBid(((CdmaResult)item).getBid());
-                        c.setNid(((CdmaResult)item).getNid());
-                        c.setPn(((CdmaResult)item).getPn());
-                        c.setRx(((CdmaResult)item).getRx());
+                        c.setSid(((CdmaResult) item).getSid());
+                        c.setBid(((CdmaResult) item).getBid());
+                        c.setNid(((CdmaResult) item).getNid());
+                        c.setPn(((CdmaResult) item).getPn());
+                        c.setRx(((CdmaResult) item).getRx());
                         arraylist8.add(c);
-                }
+                    }
 
-                if(origin.indexOf(item) == origin.size() - 1){
-                    notify1();
+                    if (origin.indexOf(item) == origin.size() - 1) {
+                        notify1();
+                    }
                 }
-        }
-
+            }
         }
     }
 

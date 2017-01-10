@@ -26,11 +26,6 @@ import java.util.List;
 
 import static com.kuaikan.app.scenecollection.R.id.startTime;
 
-//import com.android.internal.telephony.Phone;
-//import com.android.internal.telephony.PhoneFactory;
-//import android.os.AsyncResult;
-//import com.mediatek.internal.telephony.ltedc.LteDcPhoneProxy;
-
 public class OneKeyActivityB extends Activity{
 
     private RelativeLayout bar;
